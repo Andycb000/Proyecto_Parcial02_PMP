@@ -1,6 +1,7 @@
 #ifndef publicacion_h
 #define publicacion_h
 #include <string>
+#include <iostream> 
 #include "usuario.h"
 using namespace std;
 

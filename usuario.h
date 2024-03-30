@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 #include "publicacion.h"
+#include "redsocial.h"
+
 using namespace std;
 
 class Usuario
