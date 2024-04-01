@@ -25,7 +25,7 @@ class Usuario
     void mostrarAmigos();
     void mostrarPublicaciones();
     void agregarAmigo(Usuario*nuevoAmigo);
-    void crearPublicacion();
+    void crearPublicacion(RedSocial& redSocial);
     Usuario* getAmigo(int id);
 
     Usuario(string nombre);
