@@ -18,6 +18,7 @@ class Usuario
     string nacionalidad;
     vector<Usuario*>amigos;
     vector<Publicacion*>publicaciones;
+    
 
     int getId();
     void mostrar();

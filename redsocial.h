@@ -19,6 +19,7 @@ class RedSocial
     void agregarUsuario();
     void mostrarUsuarios();
     void mostrarPublicaciones();
+    void agregarPublicacion(Publicacion* nuevaPublicacion);
     Usuario* getUsuario(int id);
 
     RedSocial(string nombre);
