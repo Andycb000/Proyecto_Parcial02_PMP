@@ -49,7 +49,7 @@ void Usuario::agregarAmigo(Usuario* nuevoAmigo)
     nuevoAmigo->amigos.push_back(this);
 }
 
-void Usuario::crearPublicacion()
+void Usuario::crearPublicacion(RedSocial& redSocial)
 {
     string fecha, contenido, tipo, comentario;
     cout << "Enter the date: ";

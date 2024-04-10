@@ -7,6 +7,9 @@ using namespace std;
 using namespace rlutil;
 
 void titulo();
+using namespace rlutil;
+
+void titulo();
 
 int main()
 {
