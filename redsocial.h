@@ -8,17 +8,18 @@ using namespace std;
 class RedSocial
 {
     private:
-    vector<Usuario*>usuarios;
-    vector<Publicacion*>publicaciones;
+    vector<Usuario*>usuarios; 
+    vector<Publicacion*>publicaciones; 
 
     public:
     string nombre;
     int numeroDeUsuarios;
     int numerosDePublicaciones;
 
-    void agregarUsuario();
+    void agregarUsuario(Usuario* nuevoUsuario, int id);
     void mostrarUsuarios();
     void mostrarPublicaciones();
+    void agregarPublicacion(Publicacion* nuevaPublicacion);
     Usuario* getUsuario(int id);
 
     RedSocial(string nombre);

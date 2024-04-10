@@ -2,8 +2,11 @@
 #define usuario_h
 #include <string>
 #include <vector>
-#include "publicacion.h"
+
 using namespace std;
+
+class Publicacion;
+class RecPriv;
 
 class Usuario
 {
@@ -16,13 +19,17 @@ class Usuario
     string nacionalidad;
     vector<Usuario*>amigos;
     vector<Publicacion*>publicaciones;
+    vector<RecPriv*>recomendacionesPrivadasR;
+    
 
     int getId();
+    void setId(int id);
     void mostrar();
     void mostrarAmigos();
     void mostrarPublicaciones();
-    void agregarAmigo(Usuario*nuevoAmigo);
+    void agregarAmigo(Usuario* nuevoAmigo);
     void crearPublicacion();
+    void crearRecomendacionPrivada(Usuario* receptor);
     Usuario* getAmigo(int id);
 
     Usuario(string nombre);
