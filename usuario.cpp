@@ -28,14 +28,16 @@ void Usuario::mostrarAmigos()
     cout<< "Friend list of " << this->nombre << ": " << endl;
     for(int i=0;i < amigos.size(); i++)
     {
-        cout << i+1 << ". " << amigos[i]->nombre << endl; 
+        cout << i+1 << ". " << amigos[i]->nombre << endl;
     }
+    cout << endl;
+    cout << endl;
 }
 
 void Usuario::mostrarPublicaciones()
 {
     cout<< "Posts of " << this->nombre << ": " << endl;
-    for(int i=0; i<publicaciones.size(); i++)
+    for(int i=0; i<this->publicaciones.size(); i++)
     {
         publicaciones[i]->mostrarPublicacion();
         cout << endl;
@@ -49,7 +51,7 @@ void Usuario::agregarAmigo(Usuario* nuevoAmigo)
     nuevoAmigo->amigos.push_back(this);
 }
 
-void Usuario::crearPublicacion(RedSocial& redSocial)
+void Usuario::crearPublicacion()
 {
     string fecha, contenido, tipo, comentario;
     cout << "Enter the date: ";

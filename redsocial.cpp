@@ -3,7 +3,7 @@
 #include <iostream>
 using namespace std;
 
-void RedSocial::agregarUsuario(Usuario* nuevoUsuario, int id) //y aqui que o que
+void RedSocial::agregarUsuario(Usuario* nuevoUsuario, int id) 
 {
     this->usuarios.push_back(nuevoUsuario);
     numeroDeUsuarios++;
@@ -24,7 +24,7 @@ void RedSocial::mostrarUsuarios()
 void RedSocial::mostrarPublicaciones()
 {
     cout << "All posts: " << endl;
-    for (size_t i = 0; i < publicaciones.size(); ++i) 
+    for (size_t i = 0; i < publicaciones.size(); i++) 
     {
         publicaciones[i]->mostrarPublicacion();
         cout << endl;

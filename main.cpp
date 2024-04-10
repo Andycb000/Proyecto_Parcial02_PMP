@@ -16,41 +16,43 @@ int main()
     int idtot = 0;
     int loginID;
     int amiguito;
-    Usuario* logIn;
-    Usuario* ptramiguin;
+    Usuario *logIn;
+    Usuario *ptramiguin;
     int receptorsin;
     int r2;
     string nom, nac;
     int age;
-    
-    //Declarar red social
+
+    // Declarar red social
     RedSocial musicBox("Music Box");
 
-    //Declarar usuarios base
+    // Declarar usuarios base
     Usuario u1("Allison", 17, "Canadiense");
     idtot++;
-    musicBox.agregarUsuario(&u1,idtot);
+    musicBox.agregarUsuario(&u1, idtot);
 
     Usuario u2("Anthony", 17, "Alemán");
     idtot++;
-    musicBox.agregarUsuario(&u2,idtot);
+    musicBox.agregarUsuario(&u2, idtot);
 
     Usuario u3("Julia", 25, "Española");
     idtot++;
-    musicBox.agregarUsuario(&u3,idtot);
+    musicBox.agregarUsuario(&u3, idtot);
 
-    //Declarar publicaciones base
-    Publicacion rec1 (musicBox.getUsuario(1), "30/mayo/2023", "Album", "Souvlaki Space Station - Slowdive", "Es uno de mis albumes favoritos de shoegaze");
+    // Declarar publicaciones base
+    Publicacion rec1(musicBox.getUsuario(1), "30/mayo/2023", "Album", "Souvlaki Space Station - Slowdive", "Es uno de mis albumes favoritos de shoegaze");
     musicBox.agregarPublicacion(&rec1);
-    
-    Publicacion rec2 (musicBox.getUsuario(2), "12/junio/2023", "Canción", "Earthmover - Have A Nice Life");
+    u1.publicaciones.push_back(&rec1);
+
+    Publicacion rec2(musicBox.getUsuario(2), "12/junio/2023", "Canción", "Earthmover - Have A Nice Life");
     musicBox.agregarPublicacion(&rec2);
+    u2.publicaciones.push_back(&rec2);
 
-    Publicacion rec3 (musicBox.getUsuario(3), "15/junio/2023", "Artista", "Radiohead", "Espacialmente recomiendo los albumes 'In Rainbows' y 'OK Computer'");
+    Publicacion rec3(musicBox.getUsuario(3), "15/junio/2023", "Artista", "Radiohead", "Espacialmente recomiendo los albumes 'In Rainbows' y 'OK Computer'");
     musicBox.agregarPublicacion(&rec3);
+    u3.publicaciones.push_back(&rec3);
 
-
-    //Bienvenida
+    // Bienvenida
     setColor(15);
     cout << "Welcome to the..." << endl;
     cout << endl;
@@ -58,7 +60,7 @@ int main()
     titulo();
     cout << endl;
 
-    //menu de la red social
+    // menu de la red social
 inicio:
 
     setColor(15);
@@ -70,115 +72,119 @@ inicio:
     cout << "5. Exit" << endl;
     cin >> r;
 
-    switch(r)
+    switch (r)
     {
+    case 1:
+        cls();
+        musicBox.mostrarUsuarios();
+        goto inicio;
+        break;
+
+    case 2:
+        cls();
+        musicBox.mostrarPublicaciones();
+        goto inicio;
+        break;
+
+    case 3:
+    iniciarSesion:
+        cls();
+        cout << "Log in" << endl;
+        cout << "Enter your user ID:" << endl;
+        cin >> loginID;
+
+        logIn = musicBox.getUsuario(loginID);
+
+        if (logIn == nullptr)
+        {
+            cout << "Try again" << endl;
+            goto iniciarSesion;
+        }
+
+        cls();
+        cout << "Welcome " << logIn->nombre << endl;
+    menuUsuario:
+        cout << "1. View your friend list" << endl;
+        cout << "2. View your music recommendations" << endl;
+        cout << "3. Make a music recommendation" << endl;
+        cout << "4. View a friend profile" << endl;
+        cout << "5. Add a friend" << endl;
+        cout << "6. Make a private recommendation" << endl;
+        cout << "7. Exit" << endl;
+        cin >> r2;
+
+        switch (r2)
+        {
         case 1:
             cls();
-            musicBox.mostrarUsuarios();
-            goto inicio;
-        break;
+            logIn->mostrarAmigos();
+            goto menuUsuario;
+            break;
 
         case 2:
             cls();
-            musicBox.mostrarPublicaciones();
-            goto inicio;
-        break;
+            logIn->mostrarPublicaciones();
+            goto menuUsuario;
+            break;
 
         case 3:
-            iniciarSesion:
-            cls();
-            cout << "Log in" << endl;
-            cout << "Enter your user ID:" << endl;
-            cin >> loginID;
+            logIn->crearPublicacion();
+            goto menuUsuario;
+            break;
 
-            logIn= musicBox.getUsuario(loginID);
-
-            if (logIn == nullptr)
-            {
-                cout << "Try again" << endl;
-                goto iniciarSesion;
-            }
-
-            cls();
-            cout << "Welcome " << logIn->nombre << endl;
-            menuUsuario:
-            cout << "1. View your friend list" << endl;
-            cout << "2. View your music recommendations" << endl;
-            cout << "3. Make a music recommendation" << endl;
-            cout << "4. View a friend profile" << endl;
-            cout << "5. Add a friend" << endl;
-            cout << "6. Make a private recommendation" << endl;
-            cout << "7. Exit" << endl;
-            cin >> r2;
-
-            switch(r2)
-            {
-                case 1:
-                    cls();
-                    logIn->mostrarAmigos();
-                    goto menuUsuario;
-                break;
-    
-                case 2:
-                    cls();
-                    logIn->mostrarPublicaciones();
-                    goto menuUsuario;
-                break;
-
-                case 3:
-                    logIn->crearPublicacion();
-                break;
-
-                case 4:
-                    cout << "Enter the ID of the friend that you are looking for" << endl;
-                    cin >> amiguito;
-                    logIn->getAmigo(amiguito)->mostrar();
-                break;
-
-                case 5:
-                    cout << "Enter the ID of the user that you want to add as a friend" << endl;
-                    cin >> amiguito;
-                    logIn->agregarAmigo(musicBox.getUsuario(amiguito));
-                break;
-
-                case 6:
-                    cout << "Enter the ID of the user that you want to recommend something to" << endl;
-                    cin >> receptorsin;
-                    logIn->crearRecomendacionPrivada(musicBox.getUsuario(receptorsin));
-                break;
-
-                case 7:
-                    goto inicio;
-                    break;
-                default:
-                    cout << "Please select a valid option" << endl;
-                    goto menuUsuario;
-                break;
-            }
-
-        break;
-
-        case 4:            
-            cout << "Sign up" << endl;
-            cout << "Username: ";
-            cin >> nom;
-            cout << "Age: ";
-            cin >> age;
-            cout << "Nationality: ";
-            cin >> nac;
-            logIn=  new Usuario(nom, age, nac);
-            idtot++;
-            musicBox.agregarUsuario(logIn,idtot);
-            goto inicio;
-        break;
+        case 4:
+            cout << "Enter the ID of the friend that you are looking for" << endl;
+            cin >> amiguito;
+            logIn->getAmigo(amiguito)->mostrar();
+            goto menuUsuario;
+            break;
 
         case 5:
-            goto final;
+            cout << "Enter the ID of the user that you want to add as a friend" << endl;
+            cin >> amiguito;
+            logIn->agregarAmigo(musicBox.getUsuario(amiguito));
+            goto menuUsuario;
+            break;
+
+        case 6:
+            cout << "Enter the ID of the user that you want to recommend something to" << endl;
+            cin >> receptorsin;
+            logIn->crearRecomendacionPrivada(musicBox.getUsuario(receptorsin));
+            goto menuUsuario;
+            break;
+
+        case 7:
+            goto inicio;
+            break;
+        default:
+            cout << "Please select a valid option" << endl;
+            goto menuUsuario;
+            break;
+        }
+
         break;
 
-        default:
-            cout << "Choose a valid option" << endl;
-            goto inicio;
+    case 4:
+        cout << "Sign up" << endl;
+        cout << "Username: ";
+        cin >> nom;
+        cout << "Age: ";
+        cin >> age;
+        cout << "Nationality: ";
+        cin >> nac;
+        logIn = new Usuario(nom, age, nac);
+        idtot++;
+        musicBox.agregarUsuario(logIn, idtot);
+        goto inicio;
+        break;
+
+    case 5:
+        goto final;
+        break;
+
+    default:
+        cout << "Choose a valid option" << endl;
+        goto inicio;
         break;
     }
 final:
@@ -187,6 +193,6 @@ final:
 
 void titulo()
 {
-    setColor(4);                            
-    cout<<"MUSIC BOX"<<endl;   
+    setColor(4);
+    cout << "MUSIC BOX" << endl;
 }
